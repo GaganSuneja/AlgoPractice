@@ -1,0 +1,49 @@
+#include<iostream>
+#include<cstring>
+#include<set>
+using namespace std;
+
+void printChars(int *s,int no,set<int> & myS){
+
+	int j = 0;
+	int sum = 0 ;
+	for(;no>0;no = no>>1){
+	     int last_bit = (no&1);
+	     if(last_bit==1){
+    	//	cout<<s[j];
+    		sum+=s[j];
+	      }
+	      myS.insert(sum);
+	   j++;
+	}
+	//cout<<endl;
+}
+
+void subsetGen(int *s,int n,set<int> & myS){
+	for(int i=0; i < (1<<n); i++){
+		printChars(s,i,myS);
+	}
+}
+int main(){
+	int testCases;
+	int in[10000];
+	int n=14;
+	set<int> mySet;
+	cin>>testCases;
+	int i;
+	while(testCases){
+	    cin>>n;
+	    for(i=0;i<n;i++){
+	        cin>>in[i];
+	    }	    
+	    subsetGen(in,n,mySet);
+    	set<int>::iterator it;
+    	it = mySet.end();
+    	cout<<*--it;
+    	mySet.clear();
+      --testCases;
+	}
+	
+
+	return 0;
+}
