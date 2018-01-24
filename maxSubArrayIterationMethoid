@@ -1,0 +1,39 @@
+#include<iostream>
+using namespace std;
+long maxSubArraySum(int *in, int n){
+    long currentSum=0, previousSum=0;
+    
+    for(int i=0;i<n;i++){
+        
+        currentSum = previousSum + in[i];
+        if(currentSum<previousSum){
+            currentSum = previousSum;
+        }
+        if(currentSum<0){
+            previousSum = 0;
+        }
+        previousSum = currentSum;
+    }
+    return  currentSum;
+
+	
+}
+
+int main() {
+	
+	int testCases;
+	int n;
+	cin>>testCases;
+	int input[100000];
+	while(testCases){
+	    cin>>n;
+	    for(int x=0;x<n;x++)
+	      cin>>input[x];
+	   
+	    cout<<maxSubArraySum(input,n);
+	    cout<<endl;
+	    --testCases;
+	}
+	
+	return 0;
+}
